@@ -1,10 +1,10 @@
 const express = require('express');
-const cors = require('cors');
+const serverless = require('serverless-http');
 const app = express();
 
-const timeRoute = require('./src/routes/time');
-const flightRoutes = require('./src/routes/flightRoutes');
-const searchResultRoutes = require('./src/routes/searchResult')
+const timeRoute = require('../src/routes/time');
+const flightRoutes = require('../src/routes/flightRoutes');
+const searchResultRoutes = require('../src/routes/searchResult')
 
 app.set('view engine', 'html');
 app.use(express.static('public'));
@@ -19,7 +19,4 @@ app.use('/time', timeRoute);
 app.use('/routes', flightRoutes);
 app.use('/searchresult', searchResultRoutes);
 
-app.listen(4000, function () {
-    console.log('Listening on port 4000!')
-});
-app.use(cors());
+module.exports.handler = serverless(app);
