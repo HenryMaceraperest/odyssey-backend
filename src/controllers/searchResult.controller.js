@@ -17,6 +17,9 @@ async function get(req, res) {
         // TO query
         searchTo = req.query.to;
 
+        const FQ = searchFrom.toLowerCase();
+        const TQ = searchTo.toLowerCase();
+
         // DATE query
         searchDate = req.query.date;
 
@@ -88,9 +91,9 @@ async function get(req, res) {
             }
         };
 
-        switch (searchFrom.toLowerCase()) {
+        switch (FQ) {
             case ('mercury'):
-                switch (searchTo.toLowerCase()) {
+                switch (TQ) {
                     case ('earth'):
                         try {
                             const finalResult = findConnectingFlight(searchDate, 'Mercury', 'Venus', 'Earth');
@@ -130,7 +133,7 @@ async function get(req, res) {
                 }
                 break;
             case ('venus'):
-                switch (searchTo.toLowerCase()) {
+                switch (TQ) {
                     case ('jupiter'):
                         try {
                             const finalResult = findConnectingFlight(searchDate, 'Venus', 'Earth', 'Jupiter');
@@ -164,7 +167,7 @@ async function get(req, res) {
                 }
                 break;
             case ('earth'):
-                switch (searchTo.toLowerCase()) {
+                switch (TQ) {
                     case ('mercury'):
                         try {
                             const finalResult = findConnectingFlight(searchDate, 'Earth', 'Jupiter', 'Venus', 'Mercury');
@@ -198,7 +201,7 @@ async function get(req, res) {
                 }
                 break;
             case ('mars'):
-                switch (searchTo.toLowerCase()) {
+                switch (TQ) {
                     case ('mercury'):
                         try {
                             const finalResult = findConnectingFlight(searchDate, 'Mars', 'Venus', 'Mercury');
@@ -238,7 +241,7 @@ async function get(req, res) {
                 }
                 break;
             case ('jupiter'):
-                switch (searchTo.toLowerCase()) {
+                switch (TQ) {
                     case ('mercury'):
                         try {
                             const finalResult = findConnectingFlight(searchDate, 'Jupiter', 'Venus', 'Mercury');
@@ -272,7 +275,7 @@ async function get(req, res) {
                 }
                 break;
             case ('saturn'):
-                switch (searchTo.toLowerCase()) {
+                switch (TQ) {
                     case ('mercury'):
                         try {
                             const finalResult = findConnectingFlight(searchDate, 'Saturn', 'Neptune', 'Mercury');
@@ -306,7 +309,7 @@ async function get(req, res) {
                 }
                 break;
             case ('uranus'):
-                switch (searchTo.toLowerCase()) {
+                switch (TQ) {
                     case ('mercury'):
                         try {
                             const finalResult = findConnectingFlight(searchDate, 'Uranus', 'Neptune', 'Mercury');
@@ -340,7 +343,7 @@ async function get(req, res) {
                 }
                 break;
             case ('neptune'):
-                switch (searchTo.toLowerCase()) {
+                switch (TQ) {
                     case ('venus'):
                         try {
                             const finalResult = findConnectingFlight(searchDate, 'Neptune', 'Mercury', 'Venus');
@@ -368,9 +371,6 @@ async function get(req, res) {
                 }
                 break;
         };
-
-        const FQ = searchFrom.toLowerCase();
-        const TQ = searchTo.toLowerCase();
 
         if ((FQ === 'earth' && (TQ === 'jupiter' || TQ === 'uranus')) || (FQ === 'jupiter' && (TQ === 'mars' || TQ === 'venus')) || (FQ === 'mars' && (TQ === 'venus')) || (FQ === 'neptune' && (TQ === 'mercury' || TQ === 'uranus')) || (FQ === 'saturn' && (TQ === 'earth' || TQ === 'neptune')) || (FQ === 'uranus' && (TQ === 'neptune' || TQ === 'saturn')) || (FQ === 'venus' && (TQ === 'earth' || TQ === 'mercury')) || (FQ === 'mercury' && (TQ === 'venus'))) {
             try {
