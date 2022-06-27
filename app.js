@@ -6,7 +6,7 @@ const app = express();
 
 const timeRoute = require('./src/routes/time');
 const flightRoutes = require('./src/routes/flightRoutes');
-const searchResultRoutes = require('./src/routes/searchResult')
+const searchResultRoutes = require('./src/routes/searchResult');
 
 app.set('view engine', 'html');
 app.use(express.static('public'));
