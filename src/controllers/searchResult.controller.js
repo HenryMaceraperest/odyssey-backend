@@ -88,7 +88,7 @@ async function get(req, res) {
             response.push(responseArray);
         }
 
-        // return the results
+        // return the results 
         res.json(response);
 
     } catch (err) {
