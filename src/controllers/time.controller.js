@@ -1,7 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 
-const APIToFetch = 'https://cosmos-odyssey.azurewebsites.net/api/v1.0/TravelPrices';
+const APIToFetch = process.env.ROOT_API;
 
 async function get(req, res) {
     try {
