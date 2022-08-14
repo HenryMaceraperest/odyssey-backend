@@ -5,6 +5,3 @@
     to="/.netlify/functions/app"
     from="/*"
     status=200
-
-[context.branch-deploy.environment]
-    ROOT_API = 'https://cosmos-odyssey.azurewebsites.net/api/v1.0/TravelPrices'
