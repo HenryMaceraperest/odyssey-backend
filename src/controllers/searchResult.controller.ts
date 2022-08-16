@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import axios from 'axios';
 import WeightedGraph from '../utils/weightedGraph';
 
-const APIToFetch = 'https://cosmos-odyssey.azurewebsites.net/api/v1.0/TravelPrices';
+const APIToFetch = process.env.ROOT_API;
 
 async function getSearchResult(req: Request, res: Response) {
     try {

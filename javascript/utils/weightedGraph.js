@@ -145,4 +145,4 @@ class WeightedGraph {
         return path.reverse();
     }
 }
-module.exports = WeightedGraph;
+exports.default = WeightedGraph;

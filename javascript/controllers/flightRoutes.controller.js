@@ -8,14 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const express = require('express');
-const axios = require('axios');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const axios_1 = __importDefault(require("axios"));
 const APIToFetch = 'https://cosmos-odyssey.azurewebsites.net/api/v1.0/TravelPrices';
-function get(req, res) {
+function getFlightRoutes(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const apiRes = yield axios.get(APIToFetch);
-            result = apiRes.data.legs;
+            const apiRes = yield axios_1.default.get(APIToFetch);
+            let result = apiRes.data.legs;
             const allRoutes = [];
             for (let route of result) {
                 allRoutes.push(route.routeInfo);
@@ -27,6 +30,4 @@ function get(req, res) {
         }
     });
 }
-module.exports = {
-    get
-};
+exports.default = { getFlightRoutes };

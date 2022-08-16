@@ -8,17 +8,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const express = require('express');
-const axios = require('axios');
-let WeightedGraph = require('../utils/weightedGraph');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const axios_1 = __importDefault(require("axios"));
+const weightedGraph_1 = __importDefault(require("../utils/weightedGraph"));
 const APIToFetch = 'https://cosmos-odyssey.azurewebsites.net/api/v1.0/TravelPrices';
-function get(req, res) {
+function getSearchResult(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             // create a directional graph
-            let graph = new WeightedGraph();
+            let graph = new weightedGraph_1.default();
             // get data from api
-            const apiResponse = yield axios.get(APIToFetch);
+            const apiResponse = yield axios_1.default.get(APIToFetch);
             // select the appropriate data
             const result = apiResponse.data.legs;
             // starting data structures - 'array' for all edges + later to filter appropriate results based on flight id's returned by Dijkstra's algorithm, 'vertexes' for all unique vertexes, 'finalResult' for Dijkstra's responses, 'response' for the res.json response, after filtering the according flights from the edge's array 
@@ -100,6 +103,4 @@ function get(req, res) {
     });
 }
 ;
-module.exports = {
-    get
-};
+exports.default = { getSearchResult };

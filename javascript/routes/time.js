@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const express = require('express');
-const router = express.Router();
-const timeController = require('../controllers/time.controller');
-exports.default = router.get('/', timeController.get);
+const express_1 = __importDefault(require("express"));
+const time_controller_1 = __importDefault(require("../controllers/time.controller"));
+const router = express_1.default.Router();
+exports.default = router.get('/', time_controller_1.default.getValidUntil);
