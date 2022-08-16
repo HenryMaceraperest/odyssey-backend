@@ -1,8 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const express = require('express');
 const router = express.Router();
-
 const searchResultController = require('../controllers/searchResult.controller');
-
-router.get('/', searchResultController.get);
-
-module.exports = router;
+exports.default = router.get('/', searchResultController.get);

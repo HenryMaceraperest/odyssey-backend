@@ -1,10 +1,10 @@
-const express = require('express');
-const axios = require('axios');
-let WeightedGraph = require('../utils/weightedGraph');
+import express, { Request, Response } from 'express';
+import axios from 'axios';
+import WeightedGraph from '../utils/weightedGraph';
 
-const APIToFetch = process.env.ROOT_API;
+const APIToFetch = 'https://cosmos-odyssey.azurewebsites.net/api/v1.0/TravelPrices';
 
-async function get(req, res) {
+async function getSearchResult(req: Request, res: Response) {
     try {
         // create a directional graph
         let graph = new WeightedGraph();
@@ -17,7 +17,7 @@ async function get(req, res) {
 
         // starting data structures - 'array' for all edges + later to filter appropriate results based on flight id's returned by Dijkstra's algorithm, 'vertexes' for all unique vertexes, 'finalResult' for Dijkstra's responses, 'response' for the res.json response, after filtering the according flights from the edge's array 
         const array = [];
-        const vertexes = [];
+        const vertexes: string[] = [];
         const finalResult = [];
         const response = [];
 
@@ -53,27 +53,27 @@ async function get(req, res) {
 
         // if date variable is present, find out how many possible edges with the responding date are available from the starting vertex
         if (date) {
-            let possibleLength = graph.adjacencyList[from].map(el => new Date(el.startDate).toISOString().split('T')[0] === date);
+            let possibleLength = graph.adjacencyList[from as string].map(el => new Date(el.startDate).toISOString().split('T')[0] === date);
 
             // for each of the possibility, run Dijkstra's algorithm 
             // if the returned array is not empty, push into the final array (this has only from, to, and flight id properties), and remove the starting edge
             for (let i = 0; i <= possibleLength.length; i++) {
-                const returnedArray = graph.Dijkstra(from, to, date);
+                const returnedArray = graph.Dijkstra(from as string, to as string, date as string);
                 if (returnedArray.length > 0) {
                     finalResult.push(returnedArray);
-                    graph.removeEdge(from, returnedArray[0].flight_id)
+                    graph.removeEdge(from as string, returnedArray[0].flight_id as string)
                 }
             }
         } else {
             // if date is not present, find all the flights that go from the starting vertex
-            let possibleLength = graph.adjacencyList[from];
+            let possibleLength = graph.adjacencyList[from as string];
 
             // for each possibility, run the allPaths function (which is basically Dijkstra's algorithm without the starting date aspect), to find all possible connections to the end vertex 
             for (let i = 0; i <= possibleLength.length; i++) {
-                const returnedArray = graph.allPaths(from, to);
+                const returnedArray = graph.allPaths(from as string, to as string);
                 if (returnedArray.length > 0) {
                     finalResult.push(returnedArray);
-                    graph.removeEdge(from, returnedArray[0].flight_id)
+                    graph.removeEdge(from as string, returnedArray[0].flight_id as string)
                 }
             }
         }
@@ -96,6 +96,4 @@ async function get(req, res) {
     }
 };
 
-module.exports = {
-    get
-};
+export default { getSearchResult };

@@ -1,8 +1,9 @@
-class PriorityQueue {
+export default class PriorityQueue {
+    values: any[];
     constructor() {
         this.values = [];
     }
-    enqueue(val, priority) {
+    enqueue(val: string, priority: number) {
         this.values.push({ val, priority });
         this.sort();
     };
@@ -12,6 +13,4 @@ class PriorityQueue {
     sort() {
         this.values.sort((a, b) => a.priority - b.priority);
     };
-}
-
-module.exports = PriorityQueue;
+};
