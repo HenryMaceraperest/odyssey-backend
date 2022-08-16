@@ -1,5 +1,3 @@
-//FOR TESTING ON LOCALHOST, DEPLOYMENT FILE IS IN /functions/app.js
-
 const express = require('express');
 const cors = require('cors');
 const app = express();
